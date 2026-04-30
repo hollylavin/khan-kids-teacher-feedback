@@ -345,6 +345,20 @@
     line-height: 1.6;
   }
   .summary p { margin: 0 0 10px; }
+  .summary h4.quotes-heading {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10.5px;
+    color: var(--muted);
+    margin: 18px 0 8px;
+    font-weight: 600;
+  }
+  .summary blockquote + blockquote { margin-top: 10px; }
+  .chat-tag {
+    color: var(--muted);
+    font-style: normal;
+    font-size: 11px;
+  }
   blockquote {
     margin: 14px 0 0;
     padding: 12px 16px;
@@ -433,7 +447,7 @@
 
   <ul class="bullet-list">
     <li>Bars show the <strong>number of distinct teachers</strong> who raised each feature, on a scale from <strong>0 to 20</strong>.</li>
-    <li>Click any row to see the teachers who raised it, the sessions it surfaced in, and a representative quote.</li>
+    <li>Click any row to see the teachers who raised it, the sessions it surfaced in, and representative quotes.</li>
   </ul>
 
   <div id="categories"></div>
@@ -483,331 +497,362 @@ const FEATURES = [
     name: "Downloadable CSV / spreadsheet export of student results",
     category: "Data",
     mentions: [
-      { teacher: "Destiny Stanley",       session: "apr7" },
-      { teacher: "Shanea",                session: "apr7" },
-      { teacher: "Liliana Mendoza",       session: "apr7" },
-      { teacher: "Da'Nesha Vaughn",       session: "apr8" },
-      { teacher: "Constance Tucker",      session: "apr8" },
-      { teacher: "Cathy Prestifilippo",   session: "apr9" },
-      { teacher: "Summar Hampton",        session: "apr9" },
-      { teacher: "Yoka",                  session: "apr9" },
-      { teacher: "Leilani",               session: "apr9" },
-      { teacher: "DeAuria Moultrie",      session: "apr9" },
-      { teacher: "Jessica Noah",          session: "apr9" },
-      { teacher: "Mr. Joseph",            session: "apr14" },
-      { teacher: "Demira L.",             session: "apr14" },
-      { teacher: "Lizbeth Serrato",       session: "apr14" },
-      { teacher: "Patricia Garcia",       session: "apr14" },
-      { teacher: "Megan",                 session: "apr14" },
-      { teacher: "Teresa Fierro",         session: "spanish" },
-      { teacher: "Lianett",               session: "spanish" },
-      { teacher: "Arely",                 session: "spanish" }
+      { teacher: "Destiny Stanley", session: "apr7",
+        quote: "I would love that feature. For one, it gives the description of what they can do, and the level that they're at. We use TS Gold, so a lot of this matches what we use. It would be easy just to either take a picture of this and put it in there, or copy the description and put it in there. I think it would be perfect." },
+      { teacher: "Shanea", session: "apr7",
+        quote: "I think it would be helpful as well. The description of it is really good, like Destiny said. Especially for every age group, and for children going to kindergarten — it could be in their transcript. Would actually help them out, knowing what they do know, and what they don't." },
+      { teacher: "Liliana Mendoza", session: "apr7",
+        quote: "I like the description, and this is something that we could use for typical learning students, but we do also have IEP learners. For example, my IEP learner is on the spectrum, and she is not wanting to come and work on the tablet. Maybe cater a little bit to even the lower-level learners." },
+      { teacher: "Da'Nesha Vaughn", session: "apr8",
+        quote: "Yes. … Observation notes." },
+      { teacher: "Constance Tucker", session: "apr8",
+        quote: "I agree — observation notes for teacher strategies. That helps us out a lot. Saying, here's their level mastered, here's their learning level." },
+      { teacher: "Cathy Prestifilippo", session: "apr9",
+        quote: "I absolutely love that. I love how detailed it is — it shows you absolutely everything that you're looking for: what they mastered, what learning level they should be, and it tells you in detail in the description, if they were able to copy a simple AB pattern, or if they were able to extend it. Having an assessment like that coincides with our EWS, our early warning summary. I would be able to personally use that." },
+      { teacher: "Summar Hampton", session: "apr9",
+        quote: "I think that would be great, because it gives you an overview of all the students. Just having that to be able to download and look at it all together would be beneficial to not only us, but our students." },
+      { teacher: "Yoka", session: "apr9",
+        quote: "I agree with the other ladies, and that would help also with the TS goals, so we can level them, as well as if we can see what they're doing on one sheet. We don't have to keep going back and forth, so that would be a great idea." },
+      { teacher: "Leilani", session: "apr9",
+        quote: "Same. I agree." },
+      { teacher: "DeAuria Moultrie", session: "apr9",
+        quote: "Although my class doesn't use TS Gold at the moment, that's a very useful tool, especially because I appreciate the duration period — the time spent. It lets me know, hey, you only spent 3 minutes; if I average the class, everybody else spent about 8, you rushed through this, friend. Maybe that's why they scored so poorly. So I get not only the insight on what they were learning about — the description — but also the time they spent on it with domain. This is useful in that it can help you accurately level off a kid." },
+      { teacher: "Jessica Noah", session: "apr9", chat: true,
+        quote: "I like this as well, it gives more usable information." },
+      { teacher: "Mr. Joseph", session: "apr14",
+        quote: "Yes, only because I think that's what I have to do when we do our assessments — we have to write it in that descriptive language for each student. Sometimes it's frustrating when you have to do a small group and then you have to write similar things and just fill in their name. So yes, that would be very helpful. It would save me a lot of writing." },
+      { teacher: "Demira L.", session: "apr14",
+        quote: "I feel like it would be helpful in the classroom with getting everybody's data, and also with parents. I have a few parents trying to figure out if their child's ready for kindergarten — going straight to there, looking at that, okay, this child's here, he's learned age 3, and now he's working on age 4, so it'll help me discuss with parents and figure out their goal sheets for the next quarter, and yeah, save me some writing." },
+      { teacher: "Lizbeth Serrato", session: "apr14",
+        quote: "It would be extremely helpful, especially for us, that we use a DRDP tool to gather data, to show mastery of certain things like math and literacy. We can use that evidence to either support or just know — okay, they do know how to make an ABC pattern. It wasn't just a day where it was a coincidence, they were copying their neighbor or something. It can just help us with our notes." },
+      { teacher: "Patricia Garcia", session: "apr14", chat: true,
+        quote: "I could use it for evidence for the DRDP." },
+      { teacher: "Megan", session: "apr14", chat: true,
+        quote: "Useful for observation documentation as well." },
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "Yes, because it helps you refresh — what the student… because sometimes with so many kids, well, you do have to refresh your memory. What level? How did they do? What dates did they take it? What level are they at? What language did they take it in? That for me, yes." },
+      { teacher: "Lianett", session: "spanish",
+        quote: "For me too." },
+      { teacher: "Arely", session: "spanish",
+        quote: "I think it would also help us to know what to work on more in class, and so to implement that where they are a little behind, implement it more in the study lessons we did weekly." }
     ],
-    summary: "By far the most-requested feature. Teachers across all six sessions said a downloadable spreadsheet of student-by-assessment results would let them paste evidence directly into TS Gold, DRDP, district EWS forms, and parent-conference notes — and would save them hours of duplicated handwriting. The duration column drew specific praise (DeAuria) for catching kids who rushed through assessments.",
-    quote: "I would love that feature. It gives the description of what they can do and the level that they're at. We use TS Gold, so a lot of this matches what we use.",
-    quoteAttr: "Destiny Stanley · Apr 7"
+    summary: "By far the most-requested feature. Teachers across all six sessions said a downloadable spreadsheet of student-by-assessment results would let them paste evidence directly into TS Gold, DRDP, district EWS forms, and parent-conference notes — and would save them hours of duplicated handwriting. The duration column drew specific praise (DeAuria) for catching kids who rushed through assessments."
   },
   {
     id: "flex-window",
     name: "Flexible assessment window (over a fixed 2-week period)",
     category: "Implementation",
     mentions: [
-      { teacher: "Da'Nesha Vaughn",     session: "apr8" },
-      { teacher: "Constance Tucker",    session: "apr8" },
-      { teacher: "Giovanna Maynez",     session: "apr8" },
-      { teacher: "Cathy Prestifilippo", session: "apr9" },
-      { teacher: "Leilani",             session: "apr9" },
-      { teacher: "Lianett",             session: "spanish" },
-      { teacher: "Teresa Fierro",       session: "spanish" }
+      { teacher: "Da'Nesha Vaughn", session: "apr8",
+        quote: "I'd rather do flexible. Sometimes due to weather closures, unexpected closures, I need to be flexible. And then we are doing multiple other learning things, so I need to have a flexible time." },
+      { teacher: "Constance Tucker", session: "apr8", chat: true,
+        quote: "Flexible." },
+      { teacher: "Giovanna Maynez", session: "apr8", chat: true,
+        quote: "Flexible." },
+      { teacher: "Cathy Prestifilippo", session: "apr9",
+        quote: "I think definitely the flexible assessment window — we would have a bigger window as far as timeframe goes. I just feel like a 2-week period is just not big enough. Especially with the beginning of the year, there's a lot of stuff happening in a pre-K classroom; there's a lot of adjustments already that are happening on a daily basis for these children. So I definitely would go with the flexible." },
+      { teacher: "Leilani", session: "apr9",
+        quote: "I think both are good, depending on how big your classroom is. But I like the flexible assessment window, because anything can happen, you never know. You'd feel less time-restricted." },
+      { teacher: "Lianett", session: "spanish", chat: true,
+        quote: "Flexible better." },
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "I would also go with the flexible assessment, because that way I would see how the child works. We could see the child's behavior, and we could do a little more observation." }
     ],
-    summary: "When asked to choose between a designated 2-week assessment window and a longer flexible window, every teacher who weighed in chose flexible. The reasons clustered around weather closures, a packed pre-K beginning-of-year, and the need to align assessments with their own pacing rather than an admin-set calendar.",
-    quote: "I'd rather do flexible. Sometimes due to weather closures, unexpected closures, I need to be flexible. And then we are doing multiple other learning things, so I need to have a flexible time.",
-    quoteAttr: "Da'Nesha Vaughn · Apr 8"
+    summary: "When asked to choose between a designated 2-week assessment window and a longer flexible window, every teacher who weighed in chose flexible. The reasons clustered around weather closures, a packed pre-K beginning-of-year, and the need to align assessments with their own pacing rather than an admin-set calendar."
   },
   {
     id: "instructions",
     name: "Clearer, age-appropriate question wording",
     category: "Content",
     mentions: [
-      { teacher: "Amy Montz",                  session: "apr14" },
-      { teacher: "Stephanie (Windows User)",   session: "apr15" },
-      { teacher: "Rosie Valdez",               session: "apr15" },
-      { teacher: "Kimberly",                   session: "apr15" },
-      { teacher: "Kristy Caesar",              session: "apr15" },
-      { teacher: "Teresa Fierro",              session: "spanish" }
+      { teacher: "Amy Montz", session: "apr14",
+        quote: "If y'all could work on — whether y'all send a survey out — it's the vocabulary. For example, the first question, how many people are there? For a 4-year-old, what do you mean, are there? How many people do you see? — that's basic language I'd use in the classroom. The vocabulary for my class this year has been the biggest struggle." },
+      { teacher: "Stephanie (Windows User)", session: "apr15",
+        quote: "I think the last two are a little bit more confusing in the directions. Like, find the right letter to make the word bed. Maybe if it was more like, what is the first… so they can correlate the sound to the letter? And even if the bear sounded it out a little bit more after they said can — maybe so the beginning students can hear the sounds — that would help." },
+      { teacher: "Rosie Valdez", session: "apr15",
+        quote: "I saw some of my learners doing it. I did have to kind of redirect them and tell them, okay, like, how would you read the book? And then that helped them tap it in order. Maybe adding that phrase to the beginning of that question." },
+      { teacher: "Kimberly", session: "apr15", chat: true,
+        quote: "The letter part was great — it was the word part they got confused, as they tried to only look for the letter above in the word, like looking for D, the word pig." },
+      { teacher: "Kristy Caesar", session: "apr15",
+        quote: "I can give some feedback on tapping the words in order. For some reason, a lot of my learners didn't understand about tapping the screen, even though we practiced that, so that was just something that I had to go back and show many of them." },
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "I agree with my colleagues on the first and second. But like you say, 'leche' — that's where they no longer pay attention. So that's where, well, we didn't do well." }
     ],
-    summary: "Teachers flagged specific phrases that don't land for 3- and 4-year-olds — \"How many people are there?\" (Amy), \"Find the right letter to make the word bed\" (Stephanie/Kimberly), and the syllable-deletion prompt \"leche without che\" (Teresa) all came up as too formal or too abstract. Rosie suggested anchoring the print-concepts question with \"How would you read the book?\" to cue the action.",
-    quote: "How many people are there? For a four-year-old, what do you mean, are there? How many people do you see? — that's basic language I'd use in the classroom. The vocabulary for my class this year has been the biggest struggle.",
-    quoteAttr: "Amy Montz · Apr 14"
+    summary: "Teachers flagged specific phrases that don't land for 3- and 4-year-olds — \"How many people are there?\" (Amy), \"Find the right letter to make the word bed\" (Stephanie/Kimberly), and the syllable-deletion prompt \"leche without che\" (Teresa) all came up as too formal or too abstract. Rosie suggested anchoring the print-concepts question with \"How would you read the book?\" to cue the action."
   },
   {
     id: "drag-fine-motor",
     name: "Tap-based alternatives to drag interactions for fine-motor support",
     category: "UX",
     mentions: [
-      { teacher: "Destiny Stanley",   session: "apr7" },
-      { teacher: "Shanea",            session: "apr7" },
-      { teacher: "Amy Montz",         session: "apr14" },
-      { teacher: "Wendy Rodriguez",   session: "apr14" },
-      { teacher: "Lizbeth Serrato",   session: "apr14" }
+      { teacher: "Destiny Stanley", session: "apr7",
+        quote: "Mine had trouble dragging, like, matching them. It was like they didn't understand that you're supposed to move your finger from one to the other. They could find it, but they just couldn't match it. They did not understand that you were supposed to move your finger from the pom-pom to the letter — it was just way over their heads." },
+      { teacher: "Shanea", session: "apr7",
+        quote: "Most of my children didn't really understand that one as much. The other ones, even the 3-year-olds could understand. But on the match-the-sounds one, they just looked at moving the monsters up onto the little platform — they didn't really understand to look for the sound." },
+      { teacher: "Amy Montz", session: "apr14",
+        quote: "When they do just have to tap, I have found there are certain students whose fine motor skills may not be as developed as others. Some students will poke at it and try and drag it, because they don't quite grasp at times to flatten their finger to drag it. They may know the answer, but the actual movement is frustrating. It's also with my left-handed — I have two that struggle more with that natural movement of sliding or dragging." },
+      { teacher: "Wendy Rodriguez", session: "apr14",
+        quote: "Just to agree with what Amy just said. My little ones have a hard time to drag, and also I have a left-handed little boy that gets so frustrated with that, so I just sometimes just try to skip it and do the next activity. But tapping, it's really good — I can see that they recognize the letter, recognize the sound." },
+      { teacher: "Lizbeth Serrato", session: "apr14",
+        quote: "I think I preferred either the give it to PEC, or the tap it, opposed to dragging. My learners who are maybe not that advanced would get a little bit impatient and just start clicking random letters. When they were able to visually see and hear at the same time, they were more engaged." }
     ],
-    summary: "Teachers consistently reported that students who knew the answer couldn't show it because the dragging action defeated them — particularly the pom-pom-to-letter line-drawing task and the \"drag the monster to the shelf\" pattern. Two teachers (Amy, Wendy) called out left-handed students as struggling especially. The recommendation: prefer tap-and-give-it-to-Pec or tap-the-letter formats over drag for younger students.",
-    quote: "Some students will poke at it and try and drag it. They don't quite grasp at times to flatten their finger to drag it. They may know the answer, but the actual movement is frustrating. It's also with my left-handed — I have two that struggle more with that natural movement.",
-    quoteAttr: "Amy Montz · Apr 14"
+    summary: "Teachers consistently reported that students who knew the answer couldn't show it because the dragging action defeated them — particularly the pom-pom-to-letter line-drawing task and the \"drag the monster to the shelf\" pattern. Two teachers (Amy, Wendy) called out left-handed students as struggling especially. The recommendation: prefer tap-and-give-it-to-Pec or tap-the-letter formats over drag for younger students."
   },
   {
     id: "discontinue",
     name: "Discontinue rule (auto-end after consecutive wrong answers)",
     category: "UX",
     mentions: [
-      { teacher: "Da'Nesha Vaughn",   session: "apr8" },
-      { teacher: "Natashia Vaughn",   session: "apr8" },
-      { teacher: "Constance Tucker",  session: "apr8" },
-      { teacher: "Tavia",             session: "apr8" }
+      { teacher: "Da'Nesha Vaughn", session: "apr8",
+        quote: "Discontinue." },
+      { teacher: "Natashia Vaughn", session: "apr8",
+        quote: "Discontinue." },
+      { teacher: "Constance Tucker", session: "apr8", chat: true,
+        quote: "Discontinue." },
+      { teacher: "Tavia", session: "apr8", chat: true,
+        quote: "Discontinue." }
     ],
-    summary: "When the Apr 8 group was asked to choose between investing engineering time in a discontinue rule or a pause feature, the room voted unanimously for discontinue. The thinking: a 3-year-old who cannot do an assessment shouldn't be made to sit through 20 questions of it.",
-    quote: "Discontinue.",
-    quoteAttr: "Da'Nesha Vaughn · Apr 8"
+    summary: "When the Apr 8 group was asked to choose between investing engineering time in a discontinue rule or a pause feature, the room voted unanimously for discontinue. The thinking: a 3-year-old who cannot do an assessment shouldn't be made to sit through 20 questions of it."
   },
   {
     id: "save-progress-fc",
     name: "Save Progress in full-class mode (combine the two sign-in modes)",
     category: "UX",
     mentions: [
-      { teacher: "Tavia",          session: "apr8" },
-      { teacher: "Megan",          session: "apr14" },
-      { teacher: "Kristy Caesar",  session: "apr15" }
+      { teacher: "Tavia", session: "apr8", chat: true,
+        quote: "Yes — would still prefer signing in via full class mode, but want save-progress to apply there too." },
+      { teacher: "Megan", session: "apr14", chat: true,
+        quote: "I would definitely like the save progress over using the full class mode. … Yes, if we could have it in full class mode." },
+      { teacher: "Kristy Caesar", session: "apr15",
+        quote: "I wish there was a way that we could combine them both, so that if a child did go to the bathroom, it would keep them where they're at, but then it would be easier for my staff to get the learners on quicker for the full class mode." }
     ],
-    summary: "The Save Progress feature only works in student-only mode today, but most teachers prefer full-class mode — partly because logging students in and out is too slow, partly because finding-your-name is itself a literacy practice. Teachers want both: full-class mode's speed plus student-only's 10-minute resume window.",
-    quote: "I wish there was a way that we could combine them both, so that if a child did go to the bathroom, it would keep them where they're at, but then it would be easier for my staff to get the learners on quicker for the full class mode.",
-    quoteAttr: "Kristy Caesar · Apr 15"
+    summary: "The Save Progress feature only works in student-only mode today, but most teachers prefer full-class mode — partly because logging students in and out is too slow, partly because finding-your-name is itself a literacy practice. Teachers want both: full-class mode's speed plus student-only's 10-minute resume window."
   },
   {
     id: "save-longer",
     name: "Extend the 10-minute save-progress window",
     category: "UX",
     mentions: [
-      { teacher: "Stephanie Begay",   session: "apr7" },
-      { teacher: "Liliana Mendoza",   session: "apr7" },
-      { teacher: "Patricia Garcia",   session: "apr14" }
+      { teacher: "Stephanie Begay", session: "apr7", chat: true,
+        quote: "It's pretty simple to use, and maybe do a save for longer." },
+      { teacher: "Liliana Mendoza", session: "apr7",
+        quote: "For me, I don't know if that 10 minutes of saving would be beneficial, unless they just get up to use the restroom. Typically they do their 10–15 minutes, and then they get to go to Free Choice. If they've already been there more than 10 minutes, then I just let them go to Free Choice." },
+      { teacher: "Patricia Garcia", session: "apr14",
+        quote: "Sometimes I feel like it would be more beneficial if it was longer than 10 minutes. That problem was too hard, so what they need is a little break from it — and if it saves it for the day. Sometimes if we don't finish in the morning our lessons, then we continue in the PM session." }
     ],
-    summary: "Among teachers who knew about the 10-minute save window, several said it was too short. Patricia raised a different cadence entirely — saving across the morning-to-afternoon gap — for kids who hit a wall and need a real break, not just a bathroom break.",
-    quote: "Sometimes it would be more beneficial if it was longer than 10 minutes. That problem was too hard, so what they need is a little break from it — and if it saves it for the day, sometimes if we don't finish in the morning our lessons, then we continue in the PM session.",
-    quoteAttr: "Patricia Garcia · Apr 14"
+    summary: "Among teachers who knew about the 10-minute save window, several said it was too short. Patricia raised a different cadence entirely — saving across the morning-to-afternoon gap — for kids who hit a wall and need a real break, not just a bathroom break."
   },
   {
     id: "auto-advance",
     name: "Auto-advance / item duration limit on inactive questions",
     category: "UX",
     mentions: [
-      { teacher: "Teresa Fierro",   session: "spanish" },
-      { teacher: "Arely",           session: "spanish" },
-      { teacher: "María Luna",      session: "spanish" }
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "Like in a corner, the time they've been working on the tablet on this activity. So as teachers, who are always running around, it's easier for us to peek and say, they already have 10, 12 minutes — okay, perfect, it's done." },
+      { teacher: "Arely", session: "spanish",
+        quote: "I think yes, it would be a good idea. We have kids who finish activities in less than 2 minutes because they just do it boom, boom, boom quickly to finish, because they don't like it. And there are others who sit down, grab the screen, and watch the screen for a long time. I have to take them off because they already have 20 minutes on one activity and they haven't even finished. For some students, I think yes." },
+      { teacher: "María Luna", session: "spanish",
+        quote: "Yes, that would also be a good idea, but it would also be like considering the ages of the kids. Because in our classroom there have also been kids who are 3 years old, and the 4-year-olds already do the activities faster, and with the 3-year-olds — they start playing with the little fish, they put them in, they take them out again, because they know that it's done." }
     ],
-    summary: "Teachers in the Spanish session described kids parking on a single question — playing with the fishbowl, watching the screen — for 10–20 minutes. They want a cap so the assessment moves on after 30–60 seconds of inactivity. Lianett pushed back on per-question timers as too pressuring; the request is timeout on idleness, not a stopwatch on every question.",
-    quote: "Like in a corner, the time they've been working on the tablet on this activity. So as teachers, who are always running around, it's easier for us to peek and say, they already have 10, 12 minutes — okay, perfect, it's done.",
-    quoteAttr: "Teresa Fierro · Spanish session"
+    summary: "Teachers in the Spanish session described kids parking on a single question — playing with the fishbowl, watching the screen — for 10–20 minutes. They want a cap so the assessment moves on after 30–60 seconds of inactivity. Lianett pushed back on per-question timers as too pressuring; the request is timeout on idleness, not a stopwatch on every question."
   },
   {
     id: "timer",
     name: "Visible session timer for the teacher",
     category: "UX",
     mentions: [
-      { teacher: "Teresa Fierro",   session: "spanish" },
-      { teacher: "Arely",           session: "spanish" },
-      { teacher: "Lianett",         session: "spanish" }
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "There isn't, like — where you can see the time the child has been when they're using the application, doing the activity. There isn't like a little clock or something we can see, like to peek at, when we're observing them and look — they already have 5 minutes, now they have 10." },
+      { teacher: "Arely", session: "spanish",
+        quote: "Sometimes with those who take a long time, we put a timer — like I put one on my phone. There are kids who just like to be playing with the little fishbowl — they were tossing the fish and taking them out again. So when those types of activities come up, I set a timer for them. Just three minutes for you to finish that. I put my phone there and they have to finish that activity." },
+      { teacher: "Lianett", session: "spanish",
+        quote: "Set like a little bell, a notice or something — I don't know, for a kid who's been on an assessment for 20 minutes, that's already too much. But not per question. For me, putting a time on an assessment is like pressuring them, and it's something that's supposed to be free, that we want them to like and that motivates them." }
     ],
-    summary: "Three teachers in the Spanish session described running their own kitchen-timer or phone-timer next to the iPad to know when a student had been on a single activity too long. They want this surfaced inside the app — either as a small clock in the corner or as an alert when a session crosses 20 minutes.",
-    quote: "Set like a little bell, a notice or something — I don't know, for a kid who's been on an assessment for 20 minutes, that's already too much.",
-    quoteAttr: "Lianett · Spanish session"
+    summary: "Three teachers in the Spanish session described running their own kitchen-timer or phone-timer next to the iPad to know when a student had been on a single activity too long. They want this surfaced inside the app — either as a small clock in the corner or as an alert when a session crosses 20 minutes."
   },
   {
     id: "exit-prevention",
     name: "Better screen-exit prevention (lock kids inside the app)",
     category: "UX",
     mentions: [
-      { teacher: "Kimberly",     session: "apr15" },
-      { teacher: "María Luna",   session: "spanish" },
-      { teacher: "Arely",        session: "spanish" }
+      { teacher: "Kimberly", session: "apr15", chat: true,
+        quote: "Yes, we found a way to lock screen." },
+      { teacher: "María Luna", session: "spanish",
+        quote: "In our classroom there are some kids who exit, but they already know how to exit, and they go to take pictures, they go to the camera. Then later see if there's something so they can't exit, because there are many children who already know how to operate tablets. And they know where to go. And even search to go to Google." },
+      { teacher: "Arely", session: "spanish",
+        quote: "With us, too. The kids normally swipe the screen up by accident, or some, because they already know how to do it — they swipe the screen up. They exit the program. I've found some that are even in settings and changing things on the iPad. We don't have applications like Google or anything like that on our iPads, but yes, the camera and the tablet settings." }
     ],
-    summary: "Tech-savvy 4-year-olds figured out the swipe-up gesture and started exiting the app to find the camera, Safari, or iPad settings. Kimberly told the room she'd hacked together her own screen-lock. The Spanish-session teachers reported this happening multiple times per child per day. The ask is for in-app guided access or a swipe lock that survives kid-finger curiosity.",
-    quote: "There are some kids who exit, but they already know how to exit, and they go to take pictures, they go to the camera. Then later see if there's something so they can't exit, because there are many children who already know how to operate tablets.",
-    quoteAttr: "María Luna · Spanish session"
+    summary: "Tech-savvy 4-year-olds figured out the swipe-up gesture and started exiting the app to find the camera, Safari, or iPad settings. Kimberly told the room she'd hacked together her own screen-lock. The Spanish-session teachers reported this happening multiple times per child per day. The ask is for in-app guided access or a swipe lock that survives kid-finger curiosity."
   },
   {
     id: "instructions-replay",
     name: "Teacher button to repeat instructions mid-task",
     category: "UX",
     mentions: [
-      { teacher: "DeAuria Moultrie",   session: "apr9" },
-      { teacher: "Jessica Noah",       session: "apr9" }
+      { teacher: "DeAuria Moultrie", session: "apr9",
+        quote: "I tapped Cody so Cody can repeat the question, and Cody did not repeat it. So that, I feel like, will be a great addition — for all of it to repeat. Tap the heart that's on the same side, or whatever the instructions are, for that to be repeated. If I'm jumping halfway in, I don't know what they're talking about. If I'm sidetracked helping someone else, I don't really remember what your instructions were." },
+      { teacher: "Jessica Noah", session: "apr9",
+        quote: "Oh, I agree. I had the same thing happen, and I pushed Cody, and he didn't help me. Maybe even if they can type the instructions above, so we can read it and know how to direct the child, that would be awesome." }
     ],
-    summary: "On the executive-function assessments (hearts/stars, day/night), teachers can't help kids who get stuck because they never heard the instruction in the first place. DeAuria suggested a \"secret\" teacher-only button to replay the prompt; Jessica suggested the same instructions written above the activity so a teacher can read and re-prompt without making the student listen again.",
-    quote: "I tapped Cody so Cody can repeat the question, and Cody did not repeat it. So that, I feel like, will be a great addition to it for all of it to repeat. If I'm jumping halfway in, I don't know what they're talking about.",
-    quoteAttr: "DeAuria Moultrie · Apr 9"
+    summary: "On the executive-function assessments (hearts/stars, day/night), teachers can't help kids who get stuck because they never heard the instruction in the first place. DeAuria suggested a \"secret\" teacher-only button to replay the prompt; Jessica suggested the same instructions written above the activity so a teacher can read and re-prompt without making the student listen again."
   },
   {
     id: "lock-completed",
     name: "Lock or hide completed assignments on the student home screen",
     category: "UX",
     mentions: [
-      { teacher: "Patricia Garcia", session: "apr14" }
+      { teacher: "Patricia Garcia", session: "apr14",
+        quote: "I've noticed that sometimes my learners — when they go to their homepage, all the assignments are showing, and they have a star, that means they completed them. So then sometimes they accidentally click it again. So then I have to log it out and come back in, or with a learner who wants to always do the same one. Maybe locking those assignments, or removing them from their home screen, that would be very beneficial." }
     ],
-    summary: "Once a student completes an assignment, the starred tile stays on their home page — and several of Patricia's students just keep re-clicking the same one instead of moving to the next. Lock the completed assignment, or take it off the home screen, so the student can't accidentally redo their finished work.",
-    quote: "Sometimes they accidentally click it again. So then I have to log it out and come back in, or with a learner who wants to always do the same one. Maybe locking those assignments, or removing them from their home screen, that would be very beneficial.",
-    quoteAttr: "Patricia Garcia · Apr 14"
+    summary: "Once a student completes an assignment, the starred tile stays on their home page — and several of Patricia's students just keep re-clicking the same one instead of moving to the next. Lock the completed assignment, or take it off the home screen, so the student can't accidentally redo their finished work."
   },
   {
     id: "remove-line-match",
     name: "Remove or redesign the pom-pom line-matching question",
     category: "Content",
     mentions: [
-      { teacher: "Shanea",            session: "apr7" },
-      { teacher: "Destiny Stanley",   session: "apr7" }
+      { teacher: "Shanea", session: "apr7",
+        quote: "The activity that says 'match the sounds and the letters' — most of my children didn't really understand that one as much. Even the 3-year-olds could understand 'which letter makes the T sound.' But the matching one, they just looked at moving the monsters up onto the little platform — they didn't really understand to look for the sound." },
+      { teacher: "Destiny Stanley", session: "apr7",
+        quote: "Mine had trouble matching — they didn't understand that you're supposed to move your finger from one to the other. They could find it, but they couldn't match it. They didn't quite understand — it was like more than one task for them." }
     ],
-    summary: "On the consonant-sounds assessment, the question asking students to draw a line from a pom-pom (which says a sound) to the matching letter was the one teachers said their students could not do — not because they didn't know the sound, but because the multi-step drag-line interaction was too much. Holly confirmed the team is already considering removing it.",
-    quote: "Most of my children didn't really understand that one as much. The other ones, even the 3-year-olds could understand. But on the match-the-sounds one, they just looked at moving the monsters up onto the little platform — they didn't really understand to look for the sound.",
-    quoteAttr: "Shanea · Apr 7"
+    summary: "On the consonant-sounds assessment, the question asking students to draw a line from a pom-pom (which says a sound) to the matching letter was the one teachers said their students could not do — not because they didn't know the sound, but because the multi-step drag-line interaction was too much. Holly confirmed the team is already considering removing it."
   },
   {
     id: "easier-3yo",
     name: "Simpler, more game-like content for 3-year-olds",
     category: "Content",
     mentions: [
-      { teacher: "Shanea",            session: "apr7" },
-      { teacher: "Destiny Stanley",   session: "apr7" }
+      { teacher: "Shanea", session: "apr7",
+        quote: "I think for the 3-year-olds, the material should be a little more simpler for them to understand. With them coming fresh from the toddler classroom, it's new to them to even be sitting down and getting on the iPad, so if it was something to ease them into the material, I think that would be pretty good and helpful." },
+      { teacher: "Destiny Stanley", session: "apr7",
+        quote: "I agree. I feel like my 3-year-olds — a lot of it is just over their head. I think if it was more to their level, and more — I know it's assessments, but for the 3-year-olds, it should be more game-ish, if that makes sense. As far as the 4-year-olds, I think it's perfect." }
     ],
-    summary: "The Apr 7 group flagged that 3-year-olds — especially ones fresh out of the toddler room — are being asked to do things over their heads. The discontinue rule will help, but Shanea and Destiny separately asked for a softer on-ramp: more game-like, with the assessment skills embedded in play rather than presented as a test.",
-    quote: "I feel like for the 3-year-olds, it should be more game-ish, if that makes sense. If it was more to their level — but go, as far as for the 4-year-olds, I think it's perfect.",
-    quoteAttr: "Destiny Stanley · Apr 7"
+    summary: "The Apr 7 group flagged that 3-year-olds — especially ones fresh out of the toddler room — are being asked to do things over their heads. The discontinue rule will help, but Shanea and Destiny separately asked for a softer on-ramp: more game-like, with the assessment skills embedded in play rather than presented as a test."
   },
   {
     id: "fun-breaks",
     name: "Fun activity / break between assessments",
     category: "Content",
     mentions: [
-      { teacher: "Shanea",            session: "apr7" },
-      { teacher: "Destiny Stanley",   session: "apr7" }
+      { teacher: "Shanea", session: "apr7",
+        quote: "Even when you have to complete the activities first, and then you can go up and trace letters or any of the activities at the top — with my child who was on the spectrum, he loves the tracing game and the music. Even if there was a way to incorporate that, instead of having to complete the assessments and then go up and pick one of the activities. Not all of them know how to actually work an iPad." },
+      { teacher: "Destiny Stanley", session: "apr7",
+        quote: "Maybe let them do some of the fun stuff, and then go to the next assessment. They do an assessment, and then they do something fun, and then they do another assessment, where they're not just doing assessment, assessment, assessment. Kind of keep them focused." }
     ],
-    summary: "Several younger students treat the colouring/tracing activities at the top of the app as the reward they're working toward — and lose patience with \"assessment, assessment, assessment.\" The pitch: thread a brief play activity between assessments so kids aren't grinding through a test bank.",
-    quote: "Let them do some of the fun stuff, and then go to the next assessment. They do an assessment, and then they do something fun, and then they do another assessment, where they're not just doing assessment, assessment, assessment.",
-    quoteAttr: "Destiny Stanley · Apr 7"
+    summary: "Several younger students treat the colouring/tracing activities at the top of the app as the reward they're working toward — and lose patience with \"assessment, assessment, assessment.\" The pitch: thread a brief play activity between assessments so kids aren't grinding through a test bank."
   },
   {
     id: "spanish-blending",
     name: "Spanish-language phoneme/syllable blending assessments",
     category: "Content",
     mentions: [
-      { teacher: "Arely",          session: "spanish" },
-      { teacher: "Teresa Fierro",  session: "spanish" },
-      { teacher: "Lianett",        session: "spanish" }
+      { teacher: "Arely", session: "spanish",
+        quote: "I think for us, yes. That's what our last like 3 trainings we had here in the classroom were about. Since the kids we have are about to enter Kindergarten and are about to start reading, we have some who are already reading words of up to 4–5 letters. They're doing very well in that. I think it would be a good idea to add that to the program." },
+      { teacher: "Teresa Fierro", session: "spanish",
+        quote: "I would also like to try it, but to see how the kids would respond. Because at the end of the day, they're the ones who decide. Trying something different — that would be fun." },
+      { teacher: "Lianett", session: "spanish",
+        quote: "There are many — the classes are bilingual, but really, even though we introduce vocabulary in Spanish, we don't teach the sounds and the name of the letter in Spanish. There are many, many assessments that have the sounds — the Ñ, the J. Even the name of the letter is confusing for them. They look and say, 'which one is jota?' They speak Spanish perfectly, but those types of skills they don't have." }
     ],
-    summary: "When Mari floated the idea of porting English Blending Phonemes / Blending Syllables into Spanish, teachers in the bilingual-classroom session were enthusiastic. Lianett separately surfaced a related gap: even when classes are bilingual, the Ñ and J sounds aren't being assessed in Spanish, and her students get tripped up by Spanish letter names they otherwise know how to say.",
-    quote: "Since the kids we have are about to enter Kindergarten and are about to start reading, we have some who are already reading words of up to 4–5 letters. I think it would be a good idea to add that to the program.",
-    quoteAttr: "Arely · Spanish session"
+    summary: "When Mari floated the idea of porting English Blending Phonemes / Blending Syllables into Spanish, teachers in the bilingual-classroom session were enthusiastic. Lianett separately surfaced a related gap: even when classes are bilingual, the Ñ and J sounds aren't being assessed in Spanish, and her students get tripped up by Spanish letter names they otherwise know how to say."
   },
   {
     id: "pom-pom-pictures",
     name: "Pictures on the pom-poms in vowel-sound matching",
     category: "Content",
     mentions: [
-      { teacher: "Da'Nesha Vaughn", session: "apr8" }
+      { teacher: "Da'Nesha Vaughn", session: "apr8",
+        quote: "Sometimes if I get sidetracked and I'm going to another classroom, like the pom-pom ones — forgetting which sound makes what sound. I'm like, click that again! I think better pictures for that side, so the pom-poms would help. Matching them — like elephant, apple, otter." }
     ],
-    summary: "On the vowel-sounds assessment, the pom-poms each say a different sound — but they all look identical, so even Da'Nesha admitted she had to re-tap them to remember which was which. She suggested putting a small picture on each (elephant for short E, apple for short A, otter for short O) so the visual stays anchored to the sound.",
-    quote: "Like the pom-pom ones — forgetting which sound makes what sound. I'm like, click that again! I think better pictures for that side, the pom-poms, would help.",
-    quoteAttr: "Da'Nesha Vaughn · Apr 8"
+    summary: "On the vowel-sounds assessment, the pom-poms each say a different sound — but they all look identical, so even Da'Nesha admitted she had to re-tap them to remember which was which. She suggested putting a small picture on each (elephant for short E, apple for short A, otter for short O) so the visual stays anchored to the sound."
   },
   {
     id: "iep",
     name: "Accommodations for IEP / spectrum learners",
     category: "Content",
     mentions: [
-      { teacher: "Liliana Mendoza", session: "apr7" }
+      { teacher: "Liliana Mendoza", session: "apr7",
+        quote: "I find that my learners that are on the autism spectrum, they love collections and lining things up. They love colors. They're into animals — like ocean creatures, or color bears. To make it more enticing, for their level, the kind of things that they like to do. They love lining things up in collections of things they like." }
     ],
-    summary: "Liliana described an autism-spectrum learner who can demonstrate pattern knowledge spontaneously — through music, lining objects up, sorting by color — but cannot perform a pattern task on command. She asked the team to think about open-ended formats anchored to interests (collections, animals, ocean creatures, color bears) for learners who don't perform on cue.",
-    quote: "I find that my learners that are on the autism spectrum, they love collections and lining things up. They love colors. To make it more enticing — for their level, the kind of things that they like to do.",
-    quoteAttr: "Liliana Mendoza · Apr 7"
+    summary: "Liliana described an autism-spectrum learner who can demonstrate pattern knowledge spontaneously — through music, lining objects up, sorting by color — but cannot perform a pattern task on command. She asked the team to think about open-ended formats anchored to interests (collections, animals, ocean creatures, color bears) for learners who don't perform on cue."
   },
   {
     id: "curriculum-align",
     name: "Difficulty that scales with the school year (easier early, harder late)",
     category: "Content",
     mentions: [
-      { teacher: "Kristy Caesar", session: "apr15" }
+      { teacher: "Kristy Caesar", session: "apr15",
+        quote: "I would think about — in California, we use the Preschool/TK Learning Foundations. So in the beginning of the year, making the assessments match more skills that our learners are doing at that time, and then as the year progresses, making the assessments more challenging. Kind of like what we talked about earlier with the letters and the sounds and the words." }
     ],
-    summary: "Kristy framed it through the California Preschool/TK Foundations: at the start of the year, every assessment should be calibrated to the skills 3- and 4-year-olds are actually working on at that point in the year, then ramp up as the year progresses. Treating one assessment as the whole-year measure misses where students actually are.",
-    quote: "In the beginning of the year, making the assessments match more skills that our learners are doing at that time, and then as the year progresses, making the assessments more challenging.",
-    quoteAttr: "Kristy Caesar · Apr 15"
+    summary: "Kristy framed it through the California Preschool/TK Foundations: at the start of the year, every assessment should be calibrated to the skills 3- and 4-year-olds are actually working on at that point in the year, then ramp up as the year progresses. Treating one assessment as the whole-year measure misses where students actually are."
   },
   {
     id: "pre-post",
     name: "Pre/post-assessment baselines to show growth",
     category: "Data",
     mentions: [
-      { teacher: "Leilani",               session: "apr9" },
-      { teacher: "Cathy Prestifilippo",   session: "apr9" },
-      { teacher: "Rosie Valdez",          session: "apr15" }
+      { teacher: "Leilani", session: "apr9",
+        quote: "What I will change that will make the data more accurate will be — like, the first time, let me see what you know. See if you could do it, and then some assignments where it can measure them. So, like, the first assessment, say they do it on their own, and then go back and look at it, and be like, okay, they spent a lot of time on this, maybe they didn't understand. Before I come over there and try to assist them, we could pinpoint where they need more support." },
+      { teacher: "Cathy Prestifilippo", session: "apr9",
+        quote: "I like the idea of what Leilani was saying — having a base assessment so you can see where they are developmentally. So that you can target or do a smaller group with those students, help them to understand that skill, and then have a retest or another assessment, so that you can see how they've grown." },
+      { teacher: "Rosie Valdez", session: "apr15",
+        quote: "Are you trying to get the raw data before they know — kind of like a pre-assessment? That would really really be helpful. We give them the pre-assessment, then we can see where they're at, and that helps us map our lesson plans to see exactly what skills we need to teach. What if our learners are higher, and we can move on a little bit higher? It just kind of helps us know what we're teaching, and it's nice to see the growth from the first pre to the post. That is the missing piece for me." }
     ],
-    summary: "Three teachers, unprompted, sketched the same workflow: give the assessment cold at the start of the year as a baseline, teach to the gaps, then re-assess to show growth. Rosie put her finger on the missing piece: without pre-and-post framing, it's not clear what teachers are supposed to do with the dashboard data.",
-    quote: "Are you trying to get the raw data before they know — kind of like a pre-assessment? That would really, really be helpful — to see the growth from the first pre to the post. That's the missing piece for me.",
-    quoteAttr: "Rosie Valdez · Apr 15"
+    summary: "Three teachers, unprompted, sketched the same workflow: give the assessment cold at the start of the year as a baseline, teach to the gaps, then re-assess to show growth. Rosie put her finger on the missing piece: without pre-and-post framing, it's not clear what teachers are supposed to do with the dashboard data."
   },
   {
     id: "question-level",
     name: "Question-level data on the dashboard",
     category: "Data",
     mentions: [
-      { teacher: "Constance Tucker",          session: "apr8" },
-      { teacher: "Stephanie (Windows User)",  session: "apr15" }
+      { teacher: "Constance Tucker", session: "apr8",
+        quote: "Guess it would. … Yes." },
+      { teacher: "Stephanie (Windows User)", session: "apr15",
+        quote: "Is there a way — when you see their results, you're not really seeing, like, most of your kids got this right, or most of them didn't. To see what exactly — okay, yes, they ranked here, but I don't know what they were getting right consistently or wrong consistently, to be able to then support that further in the classroom. Were they all getting the pattern if it's just two things? Did they struggle with three patterns? Which questions were they getting, which weren't they getting, in order to better help them?" }
     ],
-    summary: "The dashboard reports a level (age 3 / age 4 / kindergarten) but doesn't show which specific questions a student got right or wrong. Stephanie laid out the use case: with item-level data, she could see whether the class struggled on 3-element patterns specifically and adjust her small-group teaching, rather than just knowing the class \"ranked here.\"",
-    quote: "When you see their results, you're not really seeing, like, most of your kids got this right, or most of them didn't. To see what exactly they were getting right consistently or wrong consistently — to be able to then support that further in the classroom.",
-    quoteAttr: "Stephanie (Windows User) · Apr 15"
+    summary: "The dashboard reports a level (age 3 / age 4 / kindergarten) but doesn't show which specific questions a student got right or wrong. Stephanie laid out the use case: with item-level data, she could see whether the class struggled on 3-element patterns specifically and adjust her small-group teaching, rather than just knowing the class \"ranked here.\""
   },
   {
     id: "next-step",
     name: "Suggested next-step practice skills based on dashboard results",
     category: "Data",
     mentions: [
-      { teacher: "Giovanna Maynez",    session: "apr8" },
-      { teacher: "Constance Tucker",   session: "apr8" }
+      { teacher: "Giovanna Maynez", session: "apr8", chat: true,
+        quote: "Focus skills? Like a next step." },
+      { teacher: "Constance Tucker", session: "apr8",
+        quote: "Probably rhyming with my kids — they had such a hard time retaining rhyming. … If you see at the 2-year-old you have X amount of students, a suggested practice skill to go with it." }
     ],
-    summary: "When Mari asked whether anything else belonged on the assessment dashboard, Giovanna and Constance landed on the same thing: pair the data with a recommended practice activity. If the class score is at age 3 and you have 8 kids who haven't moved up, the dashboard should suggest the rhyming or letter-sound practice that addresses that gap.",
-    quote: "Probably rhyming with my kids — they had such a hard time retaining rhyming. … If you see the dashboard at the 2-year-old you have X amount of students, a suggested practice skill to go with it.",
-    quoteAttr: "Constance Tucker · Apr 8"
+    summary: "When Mari asked whether anything else belonged on the assessment dashboard, Giovanna and Constance landed on the same thing: pair the data with a recommended practice activity. If the class score is at age 3 and you have 8 kids who haven't moved up, the dashboard should suggest the rhyming or letter-sound practice that addresses that gap."
   },
   {
     id: "letter-inventory",
     name: "Per-letter inventory data (which letters a student knows)",
     category: "Data",
     mentions: [
-      { teacher: "Liliana Mendoza", session: "apr7" }
+      { teacher: "Liliana Mendoza", session: "apr7",
+        quote: "Is there, for a literacy example, something that would show how many letters they know by name, or how many letters they know by sound? Is that something that could be on the data?" }
     ],
-    summary: "The current dashboard reports an age bucket (e.g., this child is at age-4 letter sound skills). Liliana asked for the underlying inventory: the actual list of which letters each student knows by name and by sound. Holly noted this had come up in earlier focus groups too and was being passed to product.",
-    quote: "Is there, for a literacy example, something that would show how many letters they know by name, or how many letters they know by sound? Is that something that could be on the data?",
-    quoteAttr: "Liliana Mendoza · Apr 7"
+    summary: "The current dashboard reports an age bucket (e.g., this child is at age-4 letter sound skills). Liliana asked for the underlying inventory: the actual list of which letters each student knows by name and by sound. Holly noted this had come up in earlier focus groups too and was being passed to product."
   },
   {
     id: "most-recent",
     name: "Show most-recent score, not highest score",
     category: "Data",
     mentions: [
-      { teacher: "Da'Nesha Vaughn", session: "apr8" }
+      { teacher: "Da'Nesha Vaughn", session: "apr8",
+        quote: "I would like to see the most recent score. So I can have a timeline — oh, this is where they're at currently, instead of seeing the highest score, which they may have scored higher in a later date versus today." }
     ],
-    summary: "When a student takes an assessment more than once, the dashboard surfaces the highest score. Da'Nesha pointed out the obvious problem: she needs to know what they can do now, not what their best day looked like in October. A timeline view (or at minimum a most-recent toggle) would let her see whether a skill has slipped.",
-    quote: "I would like to see the most recent score. So I can have a timeline — oh, this is where they're at currently, instead of seeing the highest score, which they may have scored higher in a later date versus today.",
-    quoteAttr: "Da'Nesha Vaughn · Apr 8"
+    summary: "When a student takes an assessment more than once, the dashboard surfaces the highest score. Da'Nesha pointed out the obvious problem: she needs to know what they can do now, not what their best day looked like in October. A timeline view (or at minimum a most-recent toggle) would let her see whether a skill has slipped."
   },
   {
     id: "schedule-preview",
     name: "Advance preview of upcoming assessments",
     category: "Implementation",
     mentions: [
-      { teacher: "Jasmine", session: "apr15" }
+      { teacher: "Jasmine", session: "apr15", chat: true,
+        quote: "It will be helpful to know what's going to be on the dashboard, like, a week before, so we can add it in our lesson plans." }
     ],
-    summary: "Jasmine pointed out that assessments are being assigned Sunday night / Monday morning, leaving teachers no runway to align the upcoming week's lesson plans. A week-ahead preview of what's queued would let her preteach the relevant vocabulary and make sure students aren't being assessed cold on a skill she hasn't yet introduced.",
-    quote: "It will be helpful to know what's going to be on the dashboard, like, a week before, so we can add it in our lesson plans.",
-    quoteAttr: "Jasmine · Apr 15"
+    summary: "Jasmine pointed out that assessments are being assigned Sunday night / Monday morning, leaving teachers no runway to align the upcoming week's lesson plans. A week-ahead preview of what's queued would let her preteach the relevant vocabulary and make sure students aren't being assessed cold on a skill she hasn't yet introduced."
   }
 ];
 
@@ -840,6 +885,12 @@ function renderCategory(catDef) {
     const sessionLabels = sessionIds.map(sid => SESSIONS.find(s => s.id === sid)?.label).filter(Boolean);
     const teacherList = f.mentions.map(m => m.teacher);
 
+    const quotesHtml = f.mentions.map(m => {
+      const sessLabel = SESSIONS.find(s => s.id === m.session)?.label || '';
+      const chatTag = m.chat ? ' <span class="chat-tag">(chat)</span>' : '';
+      return `<blockquote>&ldquo;${escapeHtml(m.quote)}&rdquo;<cite>— ${escapeHtml(m.teacher)} · ${escapeHtml(sessLabel)}${chatTag}</cite></blockquote>`;
+    }).join('');
+
     return `
       <tr class="feature-row" data-id="${f.id}">
         <td class="col-name"><span class="chev"></span>${escapeHtml(f.name)}</td>
@@ -860,7 +911,8 @@ function renderCategory(catDef) {
           </div>
           <div class="summary">
             <p>${escapeHtml(f.summary)}</p>
-            <blockquote>&ldquo;${escapeHtml(f.quote)}&rdquo;<cite>— ${escapeHtml(f.quoteAttr)}</cite></blockquote>
+            <h4 class="quotes-heading">Teacher quotes</h4>
+            ${quotesHtml}
           </div>
         </td>
       </tr>
